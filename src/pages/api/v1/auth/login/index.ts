@@ -2,7 +2,8 @@ import { knexPostgresClient } from "@/api/client/knexPostgresClient";
 import { generateToken } from "@/api/utils/generateToken";
 import { NextApiRequest, NextApiResponse } from "next";
 import { comparePassword } from "@/api/utils/comparePassword";
-import { LoginUser, UserFromDatabase } from "@/api/types/user";
+import { LoginUser } from "@/api/types/user";
+import { Users } from "@/api/types/typesFromDB";
 
 export default async function handler(
   req: NextApiRequest,
@@ -25,7 +26,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { password, username } = req.body as LoginUser;
 
-    const user: UserFromDatabase = await knexPostgresClient("users")
+    const user: Users = await knexPostgresClient("users")
       .select("user_id", "id_group", "password")
       .where({ name: username })
       .first();
