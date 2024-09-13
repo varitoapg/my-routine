@@ -16,6 +16,7 @@ module.exports = {
         secondary: {
           cream: "#FDF3E7",
           blue: "#4F83CC", // Good for links and text accents
+          "blue-hover": "#3D6CB6",
         },
         accent: {
           red: "#FF6347",
