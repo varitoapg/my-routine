@@ -6,7 +6,9 @@ export default function AuthLayout({
   return (
     <div className="flex min-h-screen">
       <div className="flex w-1/2 flex-col bg-gradient-to-t from-[#7AC74F] to-white p-16">
-        <h1 className="text-darkSlate text-5xl font-bold">My routine</h1>
+        <h1 className="from-primary-green-hover via-primary-orange to-primary-via-primary-orange inline-block bg-gradient-to-r bg-clip-text py-1 text-5xl font-bold text-transparent">
+          My routine
+        </h1>
 
         <div className="relative -top-24 flex flex-grow items-center">
           <div className="text-text-darkSlate font-bold">
