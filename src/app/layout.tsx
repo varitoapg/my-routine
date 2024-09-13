@@ -3,7 +3,7 @@ import "@fontsource/roboto";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Ny Routine",
+  title: "My Routine",
   description: "App to control menu routine and pantry",
 };
 
@@ -13,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="font-main-font">{children}</body>
+    <html lang="en" className="font-main-font">
+      <body>{children}</body>
     </html>
   );
 }
