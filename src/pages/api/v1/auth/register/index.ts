@@ -65,7 +65,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       userId: newUserId,
     });
 
-    res.status(200).json(token);
+    res.status(200).json({ token });
   } catch (error) {
     if ((error as Error).message === "Wrong credentials") {
       return res.status(401).json({ error: "Wrong credentials" });
