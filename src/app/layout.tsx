@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@fontsource/roboto";
 import "./globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import TanStackProvider from "lib/TanStack/TanStackProvider";
 
 export const metadata: Metadata = {
   title: "My Routine",
@@ -14,8 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="font-main bg-[#F4F7FA]">
-      <body>{children}</body>
+    <html lang="en" className="bg-[#F4F7FA] font-main">
+      <body>
+        <TanStackProvider>{children}</TanStackProvider>
+      </body>
     </html>
   );
 }
