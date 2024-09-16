@@ -2,14 +2,27 @@ import { useState } from "react";
 import Button from "../UI/Button/Button";
 import Link from "next/link";
 import { Alert } from "../UI/Alert/Alert";
+import { useRegister } from "hooks/useRegister/useRegister";
+import { useRouter } from "next/navigation";
+import { LoginUser } from "@/api/types/user";
 
 const RegisterForm = () => {
-  const initialLogindFormData = {
+  const router = useRouter();
+
+  const redirectToRoutine = () => {
+    router.push("/my-routine");
+  };
+
+  const { mutate, isPending } = useRegister(redirectToRoutine);
+
+  const initialLogindFormData: LoginUser = {
     username: "",
     password: "",
   };
 
-  const [formLoginData, setFormLoginData] = useState(initialLogindFormData);
+  const [formLoginData, setFormLoginData] = useState<LoginUser>(
+    initialLogindFormData,
+  );
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormLoginData({
@@ -20,13 +33,8 @@ const RegisterForm = () => {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
 
-    const formDataToSubmit = {
-      username: formLoginData.username,
-      password: formLoginData.password,
-    };
-
     try {
-      console.log("Form data to submit: ", formDataToSubmit);
+      await mutate(formLoginData);
     } catch (error) {
       console.error("Error while submitting form: ", error);
     }
@@ -83,7 +91,9 @@ const RegisterForm = () => {
             </Link>
           </div>
           <div>
-            <Button fullWidth={true}>Sign up</Button>
+            <Button fullWidth={true} disabled={isPending}>
+              Sign up
+            </Button>
           </div>
         </form>
         <Alert variant="warning" showIcon className="mt-5">
