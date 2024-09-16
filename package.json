@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate:types": "node ./src/pages/api/utils/generate-type.js"
+    "generate:types": "node ./src/pages/api/utils/generate-type.js",
+    "prepare": "husky"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.0.14",
@@ -39,10 +40,22 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.8",
     "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.1.6",
     "knex-types": "^0.5.0",
     "lint-staged": "^15.2.10",
     "postcss": "^8.4.45",
     "tailwindcss": "^3.4.11",
     "typescript": "^5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }
