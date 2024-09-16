@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../UI/Button/Button";
 import Link from "next/link";
+import { Alert } from "../UI/Alert/Alert";
 
 const RegisterForm = () => {
   const initialLogindFormData = {
@@ -51,7 +52,7 @@ const RegisterForm = () => {
               type="username"
               autoComplete="username"
               required
-              className="focus:ring-primary-green focus:border-primary-green mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-primary-green focus:outline-none focus:ring-primary-green sm:text-sm"
             />
           </div>
           <div>
@@ -68,7 +69,7 @@ const RegisterForm = () => {
               type="text"
               autoComplete="current-password"
               required
-              className="focus:ring-primary-green focus:border-primary-green mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-primary-green focus:outline-none focus:ring-primary-green sm:text-sm"
             />
           </div>
 
@@ -76,7 +77,7 @@ const RegisterForm = () => {
             <p>Do you already have an account?</p>
             <Link
               href="/login"
-              className="text-secondary-blue hover:text-secondary-blue-hover transition-transform duration-300 hover:scale-105"
+              className="text-secondary-blue transition-transform duration-300 hover:scale-105 hover:text-secondary-blue-hover"
             >
               Log in
             </Link>
@@ -85,6 +86,15 @@ const RegisterForm = () => {
             <Button fullWidth={true}>Sign up</Button>
           </div>
         </form>
+        <Alert variant="warning" showIcon className="mt-5">
+          <p>
+            This is a beta version of the project. Please avoid using personal
+            or sensitive information, such as passwords, until the final
+            release. Your security and privacy are our priority, and we are
+            actively working to ensure the highest standards before the official
+            launch.
+          </p>
+        </Alert>
       </div>
     </>
   );
