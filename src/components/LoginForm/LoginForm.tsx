@@ -1,14 +1,28 @@
+import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 import Button from "../UI/Button/Button";
 import Link from "next/link";
+import { useLogin } from "hooks/useLogin/useLogin";
+import { LoginUser } from "@/api/types/user";
 
 const LoginForm = () => {
+  const router = useRouter();
+
+  const redirectToRoutine = () => {
+    router.push("/my-routine");
+  };
+
+  const { mutate, isPending } = useLogin(redirectToRoutine);
+
   const initialLogindFormData = {
     username: "",
     password: "",
   };
 
-  const [formLoginData, setFormLoginData] = useState(initialLogindFormData);
+  const [formLoginData, setFormLoginData] = useState<LoginUser>(
+    initialLogindFormData,
+  );
 
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormLoginData({
@@ -16,16 +30,12 @@ const LoginForm = () => {
       [event.target.id]: event.target.value,
     });
   };
+
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
 
-    const formDataToSubmit = {
-      username: formLoginData.username,
-      password: formLoginData.password,
-    };
-
     try {
-      console.log("Form data to submit: ", formDataToSubmit);
+      await mutate(formLoginData);
     } catch (error) {
       console.error("Error while submitting form: ", error);
     }
@@ -51,7 +61,7 @@ const LoginForm = () => {
               type="username"
               autoComplete="username"
               required
-              className="focus:ring-primary-green focus:border-primary-green mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-primary-green focus:outline-none focus:ring-primary-green sm:text-sm"
             />
           </div>
           <div>
@@ -68,14 +78,14 @@ const LoginForm = () => {
               type="password"
               autoComplete="current-password"
               required
-              className="focus:ring-primary-green focus:border-primary-green mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:outline-none sm:text-sm"
+              className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-primary-green focus:outline-none focus:ring-primary-green sm:text-sm"
             />
           </div>
           <div className="flex flex-row gap-2">
             <p>Don&apos;t you have an account?</p>
             <Link
               href="/register"
-              className="text-secondary-blue hover:text-secondary-blue-hover transition-transform duration-300 hover:scale-105"
+              className="text-secondary-blue transition-transform duration-300 hover:scale-105 hover:text-secondary-blue-hover"
             >
               Create one
             </Link>
@@ -108,7 +118,9 @@ const LoginForm = () => {
             </div>
           </div> */}
           <div>
-            <Button fullWidth={true}>Sign in</Button>
+            <Button fullWidth={true} disabled={isPending}>
+              Sign in
+            </Button>
           </div>
         </form>
       </div>
