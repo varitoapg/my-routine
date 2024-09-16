@@ -1,10 +1,6 @@
-import { LoginUser } from "@/api/types/user";
+import { AuthResponse, LoginUser } from "@/api/types/user";
 
-interface LoginResponse {
-  token: string;
-}
-
-export const login = async (credentials: LoginUser): Promise<LoginResponse> => {
+export const login = async (credentials: LoginUser): Promise<AuthResponse> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}auth/login`, {
     method: "POST",
     headers: {
