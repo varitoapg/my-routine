@@ -1,7 +1,7 @@
-import { getAuthToken } from "./getToken";
+import { getCookie } from "lib/cookies/cookies";
 
 export const setTokenToHeaders = (options: RequestInit) => {
-  const token = getAuthToken();
+  const token = getCookie("auth_token");
 
   const headers = new Headers(options.headers);
   if (token) {
