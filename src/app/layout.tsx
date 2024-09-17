@@ -3,6 +3,7 @@ import "@fontsource/roboto";
 import "./globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import TanStackProvider from "lib/TanStack/TanStackProvider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "My Routine",
@@ -17,7 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-[#F4F7FA] font-main">
       <body>
-        <TanStackProvider>{children}</TanStackProvider>
+        <TanStackProvider>
+          {children}
+          <Toaster position="top-center" reverseOrder={false} />
+        </TanStackProvider>
       </body>
     </html>
   );
