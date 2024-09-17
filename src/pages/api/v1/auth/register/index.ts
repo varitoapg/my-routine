@@ -60,7 +60,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       return res.status(500).json({ error: "Failed to retrieve user ID" });
     }
 
-    const token = generateToken({
+    const token = await generateToken({
       groupId: null,
       userId: newUserId,
     });

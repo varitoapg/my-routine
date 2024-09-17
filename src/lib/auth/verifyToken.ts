@@ -1,10 +1,6 @@
-import jwt from "jsonwebtoken";
+import { jwtVerify } from "jose";
 
-const JWT_SECRET = process.env.JWT_SECRET;
-
-interface DecodedToken {
-  userId: string;
-}
+const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET as string);
 
 export const verifyToken = async (
   token: string | undefined,
@@ -12,9 +8,8 @@ export const verifyToken = async (
   if (!token) return false;
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET as string) as DecodedToken;
-
-    return !!decoded.userId;
+    const { payload } = await jwtVerify(token, JWT_SECRET);
+    return !!payload.userId;
   } catch (err) {
     console.error("Token verification failed:", err);
     return false;

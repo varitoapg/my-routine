@@ -37,7 +37,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
 
     await comparePassword(password, user.password);
 
-    const token = generateToken({
+    const token = await generateToken({
       groupId: user.id_group,
       userId: user.user_id,
     });
