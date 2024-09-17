@@ -39,7 +39,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
 
     const token = generateToken({
       groupId: user.id_group,
-      userId: req.body.user_id,
+      userId: user.user_id,
     });
 
     res.status(200).json({ token });
