@@ -1,14 +1,18 @@
 import { LoginUser } from "@/api/types/user";
 import toastGenerator from "@/components/UI/toast/toastGenerator";
 import { useMutation } from "@tanstack/react-query";
-import { setToken } from "lib/token/setToken";
+import { setCookie } from "lib/cookies/cookies";
 import { login } from "services/auth/loginService/loginService";
 
 export const useLogin = (onSuccessRedirect: () => void) => {
   return useMutation({
     mutationFn: (credentials: LoginUser) => login(credentials),
     onSuccess: (data) => {
-      setToken(data.token);
+      setCookie("auth_token", data.token, {
+        expires: 1,
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      });
       onSuccessRedirect();
       toastGenerator("Welcome back!");
     },
