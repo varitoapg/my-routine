@@ -1,4 +1,4 @@
-import { getCookie } from "lib/cookies/cookies";
+import { getCookie } from "@lib/cookies/cookies";
 
 export const setTokenToHeaders = (options: RequestInit) => {
   const token = getCookie("auth_token");

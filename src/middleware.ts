@@ -1,5 +1,5 @@
+import { verifyToken } from "@lib/auth/verifyToken";
 import { NextRequest, NextResponse } from "next/server";
-import { verifyToken } from "lib/auth/verifyToken";
 
 const protectedPaths = ["/my-routine"];
 

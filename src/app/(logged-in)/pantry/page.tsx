@@ -1,6 +1,6 @@
 "use client";
 
-import withAuth from "lib/auth/withAuth";
+import withAuth from "@lib/auth/withAuth";
 
 const Pantry = () => {
   return <div>Pantry</div>;

@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import "@fontsource/roboto";
 import "./globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import TanStackProvider from "lib/TanStack/TanStackProvider";
 import { Toaster } from "react-hot-toast";
 import { Suspense } from "react";
 import LoadingSpinner from "@/components/UI/LoadingSpinner/LoadingSpinner";
+import TanStackProvider from "@lib/TanStack/TanStackProvider";
 
 export const metadata: Metadata = {
   title: "My Routine",

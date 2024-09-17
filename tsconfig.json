@@ -20,7 +20,8 @@
     "baseUrl": "src/",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/api/*": ["pages/api/*"]
+      "@/api/*": ["pages/api/*"],
+      "@lib/*": ["lib/*"]
     }
   },
   "include": [
