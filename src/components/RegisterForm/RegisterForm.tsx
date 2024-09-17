@@ -2,9 +2,9 @@ import { useState } from "react";
 import Button from "../UI/Button/Button";
 import Link from "next/link";
 import { Alert } from "../UI/Alert/Alert";
-import { useRegister } from "hooks/useRegister/useRegister";
 import { useRouter } from "next/navigation";
 import { LoginUser } from "@/api/types/user";
+import { useRegister } from "@hooks/useRegister/useRegister";
 
 const RegisterForm = () => {
   const router = useRouter();

@@ -3,8 +3,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Button from "../UI/Button/Button";
 import Link from "next/link";
-import { useLogin } from "hooks/useLogin/useLogin";
 import { LoginUser } from "@/api/types/user";
+import { useLogin } from "@hooks/useLogin/useLogin";
 
 const LoginForm = () => {
   const router = useRouter();

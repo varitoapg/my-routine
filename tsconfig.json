@@ -21,7 +21,8 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/api/*": ["pages/api/*"],
-      "@lib/*": ["lib/*"]
+      "@lib/*": ["lib/*"],
+      "@hooks/*": ["hooks/*"]
     }
   },
   "include": [

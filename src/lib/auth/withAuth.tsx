@@ -1,6 +1,6 @@
 import React from "react";
-import { useAuth } from "hooks/useAuth/useAuth";
 import LoadingSpinner from "@/components/UI/LoadingSpinner/LoadingSpinner";
+import { useAuth } from "@hooks/useAuth/useAuth";
 
 const withAuth = (WrappedComponent: React.ComponentType) => {
   const AuthHOC: React.FC = (props) => {
