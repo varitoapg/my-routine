@@ -13,5 +13,5 @@ export const useAuth = () => {
     }
   }, [token, router]);
 
-  return token;
+  return !!token;
 };

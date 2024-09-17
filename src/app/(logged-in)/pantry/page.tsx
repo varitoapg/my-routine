@@ -3,9 +3,9 @@
 import { useAuth } from "hooks/useAuth/useAuth";
 
 const Pantry = () => {
-  useAuth();
+  const isLoggedIn = useAuth();
 
-  return <div>Pantry</div>;
+  return isLoggedIn && <div>Pantry</div>;
 };
 
 export default Pantry;

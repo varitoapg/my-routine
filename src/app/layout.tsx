@@ -4,6 +4,8 @@ import "./globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import TanStackProvider from "lib/TanStack/TanStackProvider";
 import { Toaster } from "react-hot-toast";
+import { Suspense } from "react";
+import LoadingSpinner from "@/components/UI/LoadingSpinner/LoadingSpinner";
 
 export const metadata: Metadata = {
   title: "My Routine",
@@ -19,7 +21,7 @@ export default function RootLayout({
     <html lang="en" className="bg-[#F4F7FA] font-main">
       <body>
         <TanStackProvider>
-          {children}
+          <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
           <Toaster position="top-center" reverseOrder={false} />
         </TanStackProvider>
       </body>

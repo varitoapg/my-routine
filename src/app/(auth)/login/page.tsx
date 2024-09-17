@@ -1,6 +1,12 @@
 "use client";
 
-import LoginForm from "@/components/LoginForm/LoginForm";
+import LoadingSpinner from "@/components/UI/LoadingSpinner/LoadingSpinner";
+import dynamic from "next/dynamic";
+
+const LoginForm = dynamic(() => import("@/components/LoginForm/LoginForm"), {
+  ssr: false,
+  loading: () => <LoadingSpinner />,
+});
 
 const LoginPage = () => {
   return <LoginForm />;
