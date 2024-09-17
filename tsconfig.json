@@ -19,7 +19,7 @@
     ],
     "baseUrl": "src/",
     "paths": {
-      "@/components/*": ["components/*"],
+      "@components/*": ["components/*"],
       "@/api/*": ["pages/api/*"],
       "@lib/*": ["lib/*"],
       "@hooks/*": ["hooks/*"]

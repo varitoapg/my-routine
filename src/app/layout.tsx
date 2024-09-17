@@ -4,8 +4,8 @@ import "./globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { Toaster } from "react-hot-toast";
 import { Suspense } from "react";
-import LoadingSpinner from "@/components/UI/LoadingSpinner/LoadingSpinner";
 import TanStackProvider from "@lib/TanStack/TanStackProvider";
+import LoadingSpinner from "@components/UI/LoadingSpinner/LoadingSpinner";
 
 export const metadata: Metadata = {
   title: "My Routine",

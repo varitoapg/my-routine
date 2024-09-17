@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Button from "../UI/Button/Button";
 import Link from "next/link";
-import { Alert } from "../UI/Alert/Alert";
 import { useRouter } from "next/navigation";
 import { LoginUser } from "@/api/types/user";
 import { useRegister } from "@hooks/useRegister/useRegister";
+import Button from "@components/UI/Button/Button";
+import { Alert } from "@components/UI/Alert/Alert";
 
 const RegisterForm = () => {
   const router = useRouter();
