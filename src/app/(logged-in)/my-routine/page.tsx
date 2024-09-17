@@ -1,7 +1,6 @@
-import { withAuth } from "lib/auth/withAuth";
 import React from "react";
 
-const MyRoutinePage = () => {
+const MyRoutinePage: React.FC = () => {
   return (
     <div>
       <h1>My Routine</h1>
@@ -9,4 +8,4 @@ const MyRoutinePage = () => {
   );
 };
 
-export default withAuth(MyRoutinePage);
+export default MyRoutinePage;

@@ -1,11 +1,9 @@
 "use client";
 
-import { useAuth } from "hooks/useAuth/useAuth";
+import withAuth from "lib/auth/withAuth";
 
 const Pantry = () => {
-  const isLoggedIn = useAuth();
-
-  return isLoggedIn && <div>Pantry</div>;
+  return <div>Pantry</div>;
 };
 
-export default Pantry;
+export default withAuth(Pantry);
