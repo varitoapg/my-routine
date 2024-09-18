@@ -30,7 +30,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/pages/api/utils/loadEnvironment.js"
+    "src/pages/api/utils/loadEnvironment.js",
+    "src/i18n/server.ts"
   ],
   "exclude": ["node_modules"]
 }

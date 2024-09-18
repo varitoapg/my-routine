@@ -17,6 +17,6 @@ export const removeCookie = (name: string) => {
 };
 
 export const COOKIES: Record<string, string> = {
-  LANG: "lang",
+  LANG: "i18next",
   AUTH: "auth_token",
 };
