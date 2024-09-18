@@ -6,7 +6,6 @@ import { Toaster } from "react-hot-toast";
 import { Suspense } from "react";
 import TanStackProvider from "@lib/TanStack/TanStackProvider";
 import LoadingSpinner from "@components/UI/LoadingSpinner/LoadingSpinner";
-import { Footer } from "@components/Footer/client";
 import { I18nProvider } from "i18n/i18n-context";
 import { detectLanguage } from "i18n/server";
 
@@ -24,11 +23,13 @@ export default async function RootLayout({
 
   return (
     <I18nProvider language={lng}>
-      <html lang={lng} className="bg-[#F4F7FA] font-main">
+      <html
+        lang={lng}
+        className="flex min-h-screen flex-col bg-[#F4F7FA] font-main"
+      >
         <body>
           <TanStackProvider>
             <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
-            <Footer />
             <Toaster position="top-center" reverseOrder={false} />
           </TanStackProvider>
         </body>

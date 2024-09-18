@@ -4,10 +4,17 @@ import { languages } from "../../i18n/settings";
 import { useRouter } from "next/navigation";
 import i18next from "i18next";
 
-export const LangSelect = ({ currentLanguage }) => {
+interface LangSelectProps {
+  currentLanguage: string;
+}
+
+export const LangSelect = ({ currentLanguage }: LangSelectProps) => {
   const router = useRouter();
 
-  const handleChangeLanguage = (e, lang) => {
+  const handleChangeLanguage = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    lang: string,
+  ) => {
     e.preventDefault();
     i18next.changeLanguage(lang);
     router.refresh();
