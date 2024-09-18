@@ -15,3 +15,8 @@ export const getCookie = (name: string) => {
 export const removeCookie = (name: string) => {
   Cookies.remove(name);
 };
+
+export const COOKIES: Record<string, string> = {
+  LANG: "lang",
+  AUTH: "auth_token",
+};
