@@ -24,11 +24,21 @@ async function get(req: NextApiRequest, res: NextApiResponse) {
   const { hemisphere } = req.query;
 
   try {
+    const getCurrentMonth = () => new Date().getMonth() + 1;
+
     const products = await knexPostgresClient("seasonal_produce as sp")
       .select("seasonal_produce_id", "name", "type", "month")
       .where("hemisphere", hemisphere);
 
-    res.status(200).json(products);
+    const currentMonth = getCurrentMonth();
+
+    const filteredProduce = products.filter((product) => {
+      const monthsArray = product.month.split(",").map(Number);
+
+      return monthsArray.includes(currentMonth);
+    });
+
+    res.status(200).json(filteredProduce);
   } catch (error) {
     res.status(500).json({ error: (error as Error).message });
   }
