@@ -17,12 +17,13 @@
         "name": "next"
       }
     ],
-    "baseUrl": "src/",
+    "baseUrl": "./src",
     "paths": {
+      "@api/*": ["pages/api/*"],
       "@components/*": ["components/*"],
-      "@/api/*": ["pages/api/*"],
       "@lib/*": ["lib/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@/*": ["./*"]
     }
   },
   "include": [
