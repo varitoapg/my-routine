@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { LoginUser } from "@/api/types/user";
+import { LoginUser } from "@api/types/user";
 import { useRegister } from "@hooks/useRegister/useRegister";
 import Button from "@components/UI/Button/Button";
 import { Alert } from "@components/UI/Alert/Alert";

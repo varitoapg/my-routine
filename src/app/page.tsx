@@ -1,6 +1,6 @@
 import { fetchSeasonalProduce } from "services/seasonal-produce/fetchSeasonalProduce";
 import LoadingSpinner from "@components/UI/LoadingSpinner/LoadingSpinner";
-import { SeasonalProduce } from "@/api/types/typesFromDB";
+import { SeasonalProduce } from "@api/types/typesFromDB";
 import { getServerTranslations } from "i18n/server";
 import { Footer } from "@components/Footer/Footer";
 

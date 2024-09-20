@@ -1,4 +1,4 @@
-import { LoginUser } from "@/api/types/user";
+import { LoginUser } from "@api/types/user";
 import toastGenerator from "@components/UI/toast/toastGenerator";
 import { setCookie } from "@lib/cookies/cookies";
 import { useMutation } from "@tanstack/react-query";

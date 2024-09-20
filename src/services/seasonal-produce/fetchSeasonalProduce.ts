@@ -1,4 +1,4 @@
-import { SeasonalProduce } from "@/api/types/typesFromDB";
+import { SeasonalProduce } from "@api/types/typesFromDB";
 
 export const fetchSeasonalProduce = async (
   hemisphere: string = "north",

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { knexPostgresClient } from "@/api/client/knexPostgresClient";
+import { knexPostgresClient } from "@api/client/knexPostgresClient";
 
 export default async function handler(
   req: NextApiRequest,

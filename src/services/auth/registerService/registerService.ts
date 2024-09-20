@@ -1,4 +1,4 @@
-import { AuthResponse, LoginUser } from "@/api/types/user";
+import { AuthResponse, LoginUser } from "@api/types/user";
 
 export const register = async (
   credentials: LoginUser,

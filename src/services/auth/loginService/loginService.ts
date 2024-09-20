@@ -1,4 +1,4 @@
-import { AuthResponse, LoginUser } from "@/api/types/user";
+import { AuthResponse, LoginUser } from "@api/types/user";
 
 export const login = async (credentials: LoginUser): Promise<AuthResponse> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}auth/login`, {

@@ -1,9 +1,9 @@
-import { knexPostgresClient } from "@/api/client/knexPostgresClient";
-import { generateToken } from "@/api/utils/generateToken";
+import { knexPostgresClient } from "@api/client/knexPostgresClient";
+import { generateToken } from "@api/utils/generateToken";
 import { NextApiRequest, NextApiResponse } from "next";
-import { comparePassword } from "@/api/utils/comparePassword";
-import { LoginUser } from "@/api/types/user";
-import { Users } from "@/api/types/typesFromDB";
+import { comparePassword } from "@api/utils/comparePassword";
+import { LoginUser } from "@api/types/user";
+import { Users } from "@api/types/typesFromDB";
 
 export default async function handler(
   req: NextApiRequest,
