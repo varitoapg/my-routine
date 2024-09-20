@@ -1,75 +1,35 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    darkMode: ["class"],
-    content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
-  	fontFamily: {
-  		main: ["Roboto", "sans-serif"]
-  	},
-  	extend: {
-  		colors: {
-  			primary: {
-  				green: '#7AC74F',
-  				'green-hover': '#67A83E',
-  				orange: '#FFB74D',
-  				'orange-hover': '#E69A30',
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				cream: '#FDF3E7',
-  				blue: '#4F83CC',
-  				'blue-hover': '#3D6CB6',
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			accent: {
-  				red: '#FF6347',
-  				'red-hover': '#E65239',
-  				yellow: '#FFEB3B',
-  				'yellow-hover': '#E4C92F',
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
-  			text: {
-  				darkSlate: '#2C3E50',
-  				charcoalGray: '#37474F'
-  			},
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
-  			},
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			}
-  		},
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		}
-  	}
+    fontFamily: {
+      main: ["Roboto", "sans-serif"],
+    },
+    extend: {
+      colors: {
+        primary: {
+          green: "#7AC74F", // buttons
+          "green-hover": "#67A83E",
+          orange: "#FFB74D", // call to actions, icons, buttons...
+          "orange-hover": "#E69A30",
+        },
+        secondary: {
+          cream: "#FDF3E7",
+          blue: "#4F83CC", // Good for links and text accents
+          "blue-hover": "#3D6CB6",
+        },
+        accent: {
+          red: "#FF6347",
+          "red-hover": "#E65239",
+          yellow: "#FFEB3B",
+          "yellow-hover": "#E4C92F",
+        },
+        text: {
+          darkSlate: "#2C3E50",
+          charcoalGray: "#37474F",
+        },
+      },
+    },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [],
 };
