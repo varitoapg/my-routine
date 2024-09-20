@@ -28,8 +28,7 @@ export default function AuthLayout({
           {children}
         </div>
       </div>
-
-      <Footer />
+      <Footer className="z-10 -mt-24 flex flex-row-reverse bg-transparent" />
     </div>
   );
 }

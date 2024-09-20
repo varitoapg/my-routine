@@ -1,12 +1,12 @@
-"use client";
-
-import { useTranslation } from "react-i18next";
 import FooterBase from "./FooterBase";
+import { getServerTranslations } from "@/i18n/server";
 
 interface FooterProps {
   className?: string;
 }
-export const Footer = ({ className = "" }: FooterProps) => {
-  const { t, i18n } = useTranslation("footer");
-  return <FooterBase t={t} i18n={i18n} className={className} />;
+
+export const Footer = async ({ className = "" }: FooterProps) => {
+  const { i18n } = await getServerTranslations("footer");
+
+  return <FooterBase i18n={i18n} className={className} />;
 };
