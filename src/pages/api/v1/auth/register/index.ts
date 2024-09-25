@@ -4,6 +4,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { LoginUser } from "@api/types/user";
 import bcrypt from "bcryptjs";
 import { Users } from "@api/types/typesFromDB";
+import { sendError } from "@api/utils/responses";
+import {
+  AppError,
+  Conflict,
+  InternalError,
+  MethodNotAllowed,
+} from "@lib/errors/AppError";
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,10 +22,15 @@ export default async function handler(
     if (method === "POST") {
       await post(req, res);
     } else {
-      res.status(500).json({ error: "Method not allowed" });
+      res.setHeader("Allow", ["POST"]);
+      throw new MethodNotAllowed("Method not allowed");
     }
-  } catch (error) {
-    res.status(500).json({ error: "Method not allowed" });
+  } catch (error: unknown) {
+    if (error instanceof AppError) {
+      sendError(res, error);
+      return;
+    }
+    sendError(res, new InternalError());
   }
 }
 
@@ -32,7 +44,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       .first();
 
     if (user) {
-      return res.status(401).json({ error: "User already exists" });
+      throw new Conflict("User already exists", "user");
     }
 
     const hashedPassword = await bcrypt.hash(
@@ -57,7 +69,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
     });
 
     if (!newUserId) {
-      return res.status(500).json({ error: "Failed to retrieve user ID" });
+      throw new InternalError("Failed to retrieve user ID");
     }
 
     const token = await generateToken({
@@ -66,10 +78,11 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
     });
 
     res.status(200).json({ token });
-  } catch (error) {
-    if ((error as Error).message === "Wrong credentials") {
-      return res.status(401).json({ error: "Wrong credentials" });
+  } catch (error: unknown) {
+    if (error instanceof AppError) {
+      sendError(res, error);
+      return;
     }
-    res.status(500).json({ error: (error as Error).message });
+    sendError(res, new InternalError());
   }
 }
