@@ -10,7 +10,7 @@ interface LangSelectProps {
   currentLanguage: string;
 }
 
-export const LangSelect = ({ currentLanguage }: LangSelectProps) => {
+const LangSelect = ({ currentLanguage }: LangSelectProps) => {
   const { t } = useTranslation("footer");
   const router = useRouter();
 
@@ -34,3 +34,5 @@ export const LangSelect = ({ currentLanguage }: LangSelectProps) => {
     </div>
   );
 };
+
+export default LangSelect;

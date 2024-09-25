@@ -1,6 +1,12 @@
 import { i18n } from "i18next";
-import { LangSelect } from "./LangSelect";
 import clsx from "clsx";
+import dynamic from "next/dynamic";
+import LoadingSpinner from "@components/UI/LoadingSpinner/LoadingSpinner";
+
+const LangSelect = dynamic(() => import("./LangSelect"), {
+  ssr: false,
+  loading: () => <LoadingSpinner />,
+});
 
 const FooterBase = ({
   i18n,
