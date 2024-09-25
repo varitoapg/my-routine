@@ -4,6 +4,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { comparePassword } from "@api/utils/comparePassword";
 import { LoginUser } from "@api/types/user";
 import { Users } from "@api/types/typesFromDB";
+import { AppError } from "@lib/errors/AppError";
+import { AuthErrorCodes } from "@lib/errors/types";
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,7 +34,15 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       .first();
 
     if (!user) {
-      return res.status(401).json({ error: "Wrong credentials" });
+      const error = new AppError(
+        AuthErrorCodes.WrongCredentials,
+        "Invalid username or password.",
+        401,
+      );
+
+      return res
+        .status(error.status)
+        .json({ error: error.code, message: error.message });
     }
 
     await comparePassword(password, user.password);
@@ -43,10 +53,15 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
     });
 
     res.status(200).json({ token });
-  } catch (error) {
-    if ((error as Error).message === "Wrong credentials") {
-      return res.status(401).json({ error: "Wrong credentials" });
-    }
-    res.status(500).json({ error: (error as Error).message });
+  } catch (error: unknown) {
+    const newError = new AppError(
+      AuthErrorCodes.GeneralError,
+      "General error.",
+      500,
+    );
+
+    return res
+      .status(newError.status)
+      .json({ error: newError.code, message: newError.message });
   }
 }

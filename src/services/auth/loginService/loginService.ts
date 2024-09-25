@@ -11,7 +11,8 @@ export const login = async (credentials: LoginUser): Promise<AuthResponse> => {
 
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(`Error ${response.status}: ${errorData.error}`);
+
+    throw new Error(errorData.error);
   }
 
   return response.json();
