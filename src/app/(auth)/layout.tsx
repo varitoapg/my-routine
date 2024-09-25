@@ -1,10 +1,12 @@
+import { getServerTranslations } from "@/i18n/server";
 import { Footer } from "@components/Footer/Footer";
 
-export default function AuthLayout({
+export default async function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { t } = await getServerTranslations("auth");
   return (
     <div className="flex min-h-screen flex-col">
       <div className="flex flex-1 flex-row">
@@ -15,10 +17,10 @@ export default function AuthLayout({
 
           <div className="relative -top-24 flex flex-grow items-center">
             <div className="font-bold text-text-darkSlate">
-              <p className="mt-2 text-xl">Make your own menu,</p>
-              <p className="mt-2 text-xl">Make your own recipes,</p>
-              <p className="mt-2 text-xl">Manage your own pantry or</p>
-              <p className="mt-2 text-xl">Your group&apos;s pantry and more!</p>
+              <p className="mt-2 text-xl">{t("firstLine")}</p>
+              <p className="mt-2 text-xl">{t("secondLine")}</p>
+              <p className="mt-2 text-xl">{t("thirdLine")}</p>
+              <p className="mt-2 text-xl">{t("fourthLine")}</p>
               <div className="mt-4 w-full rounded border-t-4 border-black"></div>
             </div>
           </div>
