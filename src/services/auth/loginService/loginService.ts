@@ -1,4 +1,5 @@
 import { AuthResponse, LoginUser } from "@api/types/user";
+import { AppError } from "@lib/errors/AppError";
 
 export const login = async (credentials: LoginUser): Promise<AuthResponse> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}auth/login`, {
@@ -9,11 +10,11 @@ export const login = async (credentials: LoginUser): Promise<AuthResponse> => {
     body: JSON.stringify(credentials),
   });
 
-  if (!response.ok) {
-    const errorData = await response.json();
+  const data = await response.json();
 
-    throw new Error(errorData.error);
+  if (!response.ok) {
+    throw new AppError(data.code, data.message, response.status);
   }
 
-  return response.json();
+  return data;
 };

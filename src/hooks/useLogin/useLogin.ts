@@ -7,7 +7,8 @@ import { useTranslation } from "react-i18next";
 import { login } from "services/auth/loginService/loginService";
 
 export const useLogin = (onSuccessRedirect: () => void) => {
-  const { t } = useTranslation("auth");
+  const { t } = useTranslation(["auth", "error"]);
+
   return useMutation({
     mutationFn: (credentials: LoginUser) => login(credentials),
     onSuccess: (data) => {
@@ -16,11 +17,15 @@ export const useLogin = (onSuccessRedirect: () => void) => {
         path: "/",
         secure: process.env.NODE_ENV === "production",
       });
-      onSuccessRedirect();
       toastGenerator(t("welcomeBack"));
+      onSuccessRedirect();
     },
     onError: (error: unknown) => {
-      toastGenerator(t((error as AppError).message), "error");
+      if (error instanceof AppError) {
+        toastGenerator(t(error.code, { ns: "error" }), "error");
+      } else {
+        toastGenerator(t("generalError", { ns: "error" }), "error");
+      }
     },
   });
 };

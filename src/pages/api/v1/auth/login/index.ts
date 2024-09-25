@@ -4,8 +4,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { comparePassword } from "@api/utils/comparePassword";
 import { LoginUser } from "@api/types/user";
 import { Users } from "@api/types/typesFromDB";
-import { AppError } from "@lib/errors/AppError";
-import { AuthErrorCodes } from "@lib/errors/types";
+import {
+  AppError,
+  InternalError,
+  MethodNotAllowed,
+  Unauthorized,
+} from "@lib/errors/AppError";
+import { sendError } from "@api/utils/responses";
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,10 +22,11 @@ export default async function handler(
     if (method === "POST") {
       await post(req, res);
     } else {
-      res.status(500).json({ error: "Method not allowed" });
+      res.setHeader("Allow", ["POST"]);
+      sendError(res, new MethodNotAllowed("Method not allowed"));
     }
   } catch (error) {
-    res.status(500).json({ error: "Method not allowed" });
+    sendError(res, new InternalError());
   }
 }
 
@@ -34,15 +40,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       .first();
 
     if (!user) {
-      const error = new AppError(
-        AuthErrorCodes.WrongCredentials,
-        "Invalid username or password.",
-        401,
-      );
-
-      return res
-        .status(error.status)
-        .json({ error: error.code, message: error.message });
+      sendError(res, new Unauthorized("Invalid username or password"));
     }
 
     await comparePassword(password, user.password);
@@ -54,14 +52,10 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
 
     res.status(200).json({ token });
   } catch (error: unknown) {
-    const newError = new AppError(
-      AuthErrorCodes.GeneralError,
-      "General error.",
-      500,
-    );
-
-    return res
-      .status(newError.status)
-      .json({ error: newError.code, message: newError.message });
+    if (error instanceof AppError) {
+      sendError(res, error);
+      return;
+    }
+    sendError(res, new InternalError());
   }
 }
