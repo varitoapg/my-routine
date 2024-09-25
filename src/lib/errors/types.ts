@@ -5,4 +5,5 @@ export enum AuthErrorCodes {
   NotPermission = "forbidden",
   BadRequest = "badRequest",
   MethodNotAllowed = "methodNotAllowed",
+  Conflict = "AlreadyExists",
 }

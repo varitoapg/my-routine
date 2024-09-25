@@ -36,6 +36,12 @@ export class BadRequest extends AppError {
   }
 }
 
+export class Conflict extends AppError {
+  constructor(message: string, resource?: string, code: number = 409) {
+    super(`${resource ?? ""}${AuthErrorCodes.Conflict}`, message, code);
+  }
+}
+
 export class MethodNotAllowed extends AppError {
   constructor(message: string, code: number = 405) {
     super(AuthErrorCodes.MethodNotAllowed, message, code);

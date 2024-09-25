@@ -5,8 +5,12 @@ import { LoginUser } from "@api/types/user";
 import { useRegister } from "@hooks/useRegister/useRegister";
 import Button from "@components/UI/Button/Button";
 import { Alert } from "@components/UI/Alert/Alert";
+import { TFunction } from "i18next";
 
-const RegisterForm = () => {
+interface RegisterFormProps {
+  t: TFunction;
+}
+const RegisterForm = ({ t }: RegisterFormProps) => {
   const router = useRouter();
 
   const redirectToRoutine = () => {
@@ -43,7 +47,7 @@ const RegisterForm = () => {
     <>
       <div className="w-full max-w-md">
         <h2 className="mb-6 text-center text-3xl font-semibold text-gray-800">
-          Welcome to your new life
+          {t("registerTitle")}
         </h2>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
@@ -51,7 +55,7 @@ const RegisterForm = () => {
               htmlFor="username"
               className="block text-sm font-medium text-gray-700"
             >
-              Username
+              {t("username")}
             </label>
             <input
               onChange={handleFormChange}
@@ -68,13 +72,13 @@ const RegisterForm = () => {
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
             >
-              Password
+              {t("password")}
             </label>
             <input
               onChange={handleFormChange}
               id="password"
               name="password"
-              type="text"
+              type="password"
               autoComplete="current-password"
               required
               className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-primary-green focus:outline-none focus:ring-primary-green sm:text-sm"
@@ -82,28 +86,22 @@ const RegisterForm = () => {
           </div>
 
           <div className="flex flex-row gap-2">
-            <p>Do you already have an account?</p>
+            <p>{t("haveAccount")}</p>
             <Link
               href="/login"
               className="text-secondary-blue transition-transform duration-300 hover:scale-105 hover:text-secondary-blue-hover"
             >
-              Log in
+              {t("login")}
             </Link>
           </div>
           <div>
             <Button fullWidth={true} disabled={isPending}>
-              Sign up
+              {t("signUp")}
             </Button>
           </div>
         </form>
         <Alert variant="warning" showIcon className="mt-5">
-          <p>
-            This is a beta version of the project. Please avoid using personal
-            or sensitive information, such as passwords, until the final
-            release. Your security and privacy are our priority, and we are
-            actively working to ensure the highest standards before the official
-            launch.
-          </p>
+          <p>{t("registerWarning")}</p>
         </Alert>
       </div>
     </>

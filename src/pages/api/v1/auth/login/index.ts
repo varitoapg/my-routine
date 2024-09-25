@@ -23,7 +23,7 @@ export default async function handler(
       await post(req, res);
     } else {
       res.setHeader("Allow", ["POST"]);
-      sendError(res, new MethodNotAllowed("Method not allowed"));
+      throw new MethodNotAllowed("Method not allowed");
     }
   } catch (error) {
     sendError(res, new InternalError());
@@ -40,7 +40,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       .first();
 
     if (!user) {
-      sendError(res, new Unauthorized("Invalid username or password"));
+      throw new Unauthorized("Invalid username or password");
     }
 
     await comparePassword(password, user.password);

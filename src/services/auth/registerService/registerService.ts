@@ -1,4 +1,5 @@
 import { AuthResponse, LoginUser } from "@api/types/user";
+import { AppError } from "@lib/errors/AppError";
 
 export const register = async (
   credentials: LoginUser,
@@ -14,10 +15,11 @@ export const register = async (
     },
   );
 
+  const data = await response.json();
+
   if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(`Error ${response.status}: ${errorData.error}`);
+    throw new AppError(data.code, data.message, response.status);
   }
 
-  return response.json();
+  return data;
 };
