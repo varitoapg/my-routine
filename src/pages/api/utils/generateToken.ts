@@ -1,8 +1,20 @@
-import jwt from "jsonwebtoken";
-import { TokenInformation } from "../types/token";
+import { SignJWT } from "jose";
 
-export function generateToken(payload: TokenInformation): string {
-  return jwt.sign(payload, process.env.JWT_SECRET as string, {
-    expiresIn: "2d",
-  });
+const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET as string);
+export interface TokenInformation {
+  groupId: string | null;
+  userId: string;
+}
+
+export async function generateToken(
+  payload: TokenInformation,
+): Promise<string> {
+  return new SignJWT({ ...payload })
+    .setProtectedHeader({
+      alg: "HS256",
+    })
+    .setIssuedAt()
+    .setExpirationTime("2d")
+    .setProtectedHeader({ alg: "HS256" })
+    .sign(JWT_SECRET);
 }

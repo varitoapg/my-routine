@@ -1,9 +1,16 @@
-import { knexPostgresClient } from "@/api/client/knexPostgresClient";
-import { generateToken } from "@/api/utils/generateToken";
+import { knexPostgresClient } from "@api/client/knexPostgresClient";
+import { generateToken } from "@api/utils/generateToken";
 import { NextApiRequest, NextApiResponse } from "next";
-import { comparePassword } from "@/api/utils/comparePassword";
-import { LoginUser } from "@/api/types/user";
-import { Users } from "@/api/types/typesFromDB";
+import { comparePassword } from "@api/utils/comparePassword";
+import { LoginUser } from "@api/types/user";
+import { Users } from "@api/types/typesFromDB";
+import {
+  AppError,
+  InternalError,
+  MethodNotAllowed,
+  Unauthorized,
+} from "@lib/errors/AppError";
+import { sendError } from "@api/utils/responses";
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,10 +22,11 @@ export default async function handler(
     if (method === "POST") {
       await post(req, res);
     } else {
-      res.status(500).json({ error: "Method not allowed" });
+      res.setHeader("Allow", ["POST"]);
+      throw new MethodNotAllowed("Method not allowed");
     }
   } catch (error) {
-    res.status(500).json({ error: "Method not allowed" });
+    sendError(res, new InternalError());
   }
 }
 
@@ -32,21 +40,22 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
       .first();
 
     if (!user) {
-      return res.status(401).json({ error: "Wrong credentials" });
+      throw new Unauthorized("Invalid username or password");
     }
 
     await comparePassword(password, user.password);
 
-    const token = generateToken({
+    const token = await generateToken({
       groupId: user.id_group,
-      userId: req.body.user_id,
+      userId: user.user_id,
     });
 
-    res.status(200).json(token);
-  } catch (error) {
-    if ((error as Error).message === "Wrong credentials") {
-      return res.status(401).json({ error: "Wrong credentials" });
+    res.status(200).json({ token });
+  } catch (error: unknown) {
+    if (error instanceof AppError) {
+      sendError(res, error);
+      return;
     }
-    res.status(500).json({ error: (error as Error).message });
+    sendError(res, new InternalError());
   }
 }

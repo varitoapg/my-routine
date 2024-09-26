@@ -11,22 +11,24 @@ export enum Table {
   Pantry = "pantry",
   RecipeIngredient = "recipe_ingredient",
   Recipes = "recipes",
+  SeasonalProduce = "seasonal_produce",
   Users = "users",
   UsersRecipes = "users_recipes",
 }
 
 export type Tables = {
-  "groups": Groups,
-  "groups_users": GroupsUsers,
-  "ingredients": Ingredients,
-  "measures": Measures,
-  "menu_day": MenuDay,
-  "menus": Menus,
-  "pantry": Pantry,
-  "recipe_ingredient": RecipeIngredient,
-  "recipes": Recipes,
-  "users": Users,
-  "users_recipes": UsersRecipes,
+  groups: Groups;
+  groups_users: GroupsUsers;
+  ingredients: Ingredients;
+  measures: Measures;
+  menu_day: MenuDay;
+  menus: Menus;
+  pantry: Pantry;
+  recipe_ingredient: RecipeIngredient;
+  recipes: Recipes;
+  seasonal_produce: SeasonalProduce;
+  users: Users;
+  users_recipes: UsersRecipes;
 };
 
 export type Groups = {
@@ -87,6 +89,14 @@ export type Recipes = {
   type: string;
 };
 
+export type SeasonalProduce = {
+  seasonal_produce_id: number;
+  name: string;
+  type: string;
+  month: string;
+  hemisphere: string;
+};
+
 export type Users = {
   user_id: string;
   name: string;
@@ -99,4 +109,3 @@ export type UsersRecipes = {
   id_user: string;
   id_recipes: string;
 };
-

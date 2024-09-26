@@ -1,0 +1,9 @@
+{
+  "wrongCredentials": "Credenciales incorrectas",
+  "generalError": "Algo salió mal",
+  "notFound": "Recurso no encontrado",
+  "forbidden": "No tienes permiso para realizar esta acción",
+  "badRequest": "Solicitud incorrecta",
+  "methodNotAllowed": "La acción solicitada no está permitida.",
+  "userAlreadyExists": "El usuario ya existe"
+}
