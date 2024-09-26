@@ -14,7 +14,7 @@
     "storybook-docs": "storybook dev --docs",
     "build:storybook": "storybook build",
     "predeploy:storybook": "npm run build:storybook",
-    "deploy:storybook": "npm run predeploy:storybook && -pages -d storybook-static"
+    "deploy:storybook": "npm run predeploy:storybook && gh-pages -d storybook-static"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.0.14",
