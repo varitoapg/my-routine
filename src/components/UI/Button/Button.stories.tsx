@@ -1,10 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Button from "./Button";
-import {
-  faExclamationCircle,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
 const meta = {
   component: Button,
