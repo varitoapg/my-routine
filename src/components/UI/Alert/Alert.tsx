@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { twMerge } from "tailwind-merge";
 
-const alertVariants = cva("flex items-center p-4 rounded-lg", {
+const alertVariants = cva("p-4 rounded-lg flex items-center justify-center", {
   variants: {
     variant: {
       success: "bg-green-50 text-green-800 border border-green-200",
@@ -17,9 +17,14 @@ const alertVariants = cva("flex items-center p-4 rounded-lg", {
       warning: "bg-yellow-50 text-yellow-800 border border-yellow-200",
       info: "bg-blue-50 text-blue-800 border border-blue-200",
     },
+    fullWidth: {
+      true: "w-full",
+      false: "inline-flex",
+    },
   },
   defaultVariants: {
     variant: "info",
+    fullWidth: false,
   },
 });
 
@@ -75,11 +80,16 @@ export const Alert: FC<AlertProps> = ({
   children,
   showIcon = false,
   className,
+  fullWidth = false,
 }) => {
   return (
-    <div className={twMerge(alertVariants({ variant }), className)}>
-      {showIcon && <AlertIcon variant={variant!} />}
-      <div className="ml-3">
+    <div className={twMerge(alertVariants({ variant, fullWidth }), className)}>
+      {showIcon && (
+        <div className="flex-shrink-0">
+          <AlertIcon variant={variant!} />
+        </div>
+      )}
+      <div className={`${showIcon ? "ml-3" : "w-full text-center"}`}>
         {title && <div className="font-medium">{title}</div>}
         <div>{children}</div>
       </div>
