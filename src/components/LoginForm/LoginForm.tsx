@@ -1,10 +1,12 @@
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import Link from "next/link";
+import { Formik, Form, Field } from "formik";
 import { useLogin } from "@hooks/useLogin/useLogin";
 import { LoginUser } from "@api/types/user";
 import Button from "@components/UI/Button/Button";
 import { TFunction } from "i18next";
+import TextInput from "@components/Form/TextInput/TextInput";
+import PasswordInput from "@components/Form/PasswordInput/PasswordInput";
 
 interface LoginFormProps {
   t: TFunction;
@@ -19,27 +21,9 @@ const LoginForm = ({ t }: LoginFormProps) => {
 
   const { mutate, isPending } = useLogin(redirectToRoutine);
 
-  const initialLogindFormData = {
-    username: "",
-    password: "",
-  };
-
-  const [formLoginData, setFormLoginData] = useState<LoginUser>(
-    initialLogindFormData,
-  );
-
-  const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormLoginData({
-      ...formLoginData,
-      [event.target.id]: event.target.value,
-    });
-  };
-
-  const handleSubmit = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
-
+  const handleSubmit = async (values: LoginUser) => {
     try {
-      await mutate(formLoginData);
+      await mutate(values);
     } catch (error) {
       console.error("Error while submitting form: ", error);
     }
@@ -50,56 +34,41 @@ const LoginForm = ({ t }: LoginFormProps) => {
       <h2 className="mb-6 text-center text-3xl font-semibold text-gray-800">
         {t("loginTitle")}
       </h2>
-      <form className="space-y-6" onSubmit={handleSubmit}>
-        <div>
-          <label
-            htmlFor="username"
-            className="block text-sm font-medium text-gray-700"
-          >
-            {t("username")}
-          </label>
-          <input
-            onChange={handleFormChange}
-            id="username"
-            name="username"
-            type="username"
-            autoComplete="username"
-            required
-            className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-primary-green focus:outline-none focus:ring-primary-green sm:text-sm"
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium text-gray-700"
-          >
-            {t("password")}
-          </label>
-          <input
-            onChange={handleFormChange}
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            required
-            className="mt-1 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-primary-green focus:outline-none focus:ring-primary-green sm:text-sm"
-          />
-        </div>
-        <div className="flex flex-row gap-2">
-          <p>{t("notAccount")}</p>
-          <Link
-            href="/register"
-            className="text-secondary-blue transition-transform duration-300 hover:scale-105 hover:text-secondary-blue-hover"
-          >
-            {t("createAccount")}
-          </Link>
-        </div>
-        <div>
-          <Button fullWidth={true} disabled={isPending}>
-            {t("signIn")}
-          </Button>
-        </div>
-      </form>
+      <Formik
+        initialValues={{ username: "", password: "" }}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className="space-y-6">
+            <Field
+              name="username"
+              id="username"
+              label={t("username")}
+              component={TextInput}
+            />
+            <Field
+              name="password"
+              id="password"
+              label={t("password")}
+              component={PasswordInput}
+            />
+            <div className="flex flex-row gap-2">
+              <p>{t("notAccount")}</p>
+              <Link
+                href="/register"
+                className="text-secondary-blue transition-transform duration-300 hover:scale-105 hover:text-secondary-blue-hover"
+              >
+                {t("createAccount")}
+              </Link>
+            </div>
+            <div>
+              <Button fullWidth={true} disabled={isPending || isSubmitting}>
+                {t("signIn")}
+              </Button>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
