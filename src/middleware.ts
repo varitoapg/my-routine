@@ -14,6 +14,8 @@ export async function middleware(request: NextRequest) {
   );
 
   if (!isAuthenticated && shouldProtect) {
+    url.searchParams.set("unauthorized", "true");
+
     url.pathname = "/login";
     return NextResponse.redirect(url);
   }
