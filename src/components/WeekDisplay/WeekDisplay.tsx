@@ -1,6 +1,6 @@
-import { format, addDays, startOfWeek, isSameDay } from "date-fns";
-import { Card } from "@components/UI/Card/Card";
+import { addDays, startOfWeek, isSameDay, format } from "date-fns";
 import { getServerTranslations } from "@/i18n/server";
+import DayCard from "@components/DayCard/DayCard";
 
 const WeekDisplay = async () => {
   const { t } = await getServerTranslations("weekDisplay");
@@ -11,16 +11,12 @@ const WeekDisplay = async () => {
   return (
     <div className="flex flex-wrap justify-center space-x-4">
       {daysOfWeek.map((day, index) => (
-        <Card
+        <DayCard
           key={index}
-          variant={isSameDay(day, today) ? "primary" : "default"}
-        >
-          <Card.Title className="flex items-center justify-center p-2">
-            {t(format(day, "EEEE"))}
-          </Card.Title>
-
-          <Card.Body>{format(day, "dd/MM/yyyy")}</Card.Body>
-        </Card>
+          dayName={t(format(day, "EEEE"))}
+          day={day}
+          isCurrentDay={isSameDay(day, today)}
+        />
       ))}
     </div>
   );
