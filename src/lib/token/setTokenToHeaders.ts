@@ -7,5 +7,9 @@ export const setTokenToHeaders = (options: RequestInit) => {
   if (token) {
     headers.append("Authorization", `Bearer ${token}`);
   }
-  return headers;
+
+  return {
+    ...options,
+    headers,
+  };
 };
