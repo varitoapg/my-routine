@@ -45,7 +45,9 @@ export type GroupsUsers = {
 export type Ingredients = {
   ingredient_id: string;
   id_measure: string;
-  weekday: string;
+  name: string;
+  id_user: string;
+  id_group: string | null;
 };
 
 export type Measures = {
