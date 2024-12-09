@@ -4,6 +4,7 @@ import { Ingredients } from "@api/types/typesFromDB";
 import { sendError } from "@api/utils/responses";
 import {
   AppError,
+  BadRequest,
   Conflict,
   InternalError,
   MethodNotAllowed,
@@ -36,6 +37,18 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { id_measure, name } = req.body as Ingredients;
     const userData = await checkAndDecodeToken(req);
+
+    if (!name) {
+      throw new BadRequest("Name is required");
+    }
+
+    const measure = await knexPostgresClient("measures")
+      .where({ measure_id: id_measure })
+      .first();
+
+    if (!measure) {
+      throw new BadRequest("Measure not found");
+    }
 
     const ingredient: Ingredients = await knexPostgresClient("ingredients")
       .select("*")
