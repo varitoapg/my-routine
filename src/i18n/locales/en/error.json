@@ -5,5 +5,6 @@
   "forbidden": "You do not have permission to perform this action",
   "badRequest": "Bad request",
   "methodNotAllowed": "The requested action is not allowed.",
-  "userAlreadyExists": "User already exists"
+  "userAlreadyExists": "User already exists",
+  "ingredientAlreadyExists": "Ingredient already exists"
 }

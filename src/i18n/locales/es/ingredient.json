@@ -1,0 +1,10 @@
+{
+  "addIngredient": "Añadir",
+  "editIngredientTitle": "Modificar ingrdiente",
+  "newIngredientTitle": "Nuevo ingrediente",
+  "name": "Nombre",
+  "measure": "Medida",
+  "description": "Descripción",
+  "measureIngredientRequired": "La medida del ingrediente es obligatoria",
+  "nameIngredientRequired": "El nombre del ingrediente es obligatorio"
+}
