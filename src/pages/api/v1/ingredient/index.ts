@@ -35,7 +35,7 @@ export default async function handler(
 
 async function post(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { id_measure, name } = req.body as Ingredients;
+    const { id_measure, name, description } = req.body as Ingredients;
     const userData = await checkAndDecodeToken(req);
 
     if (!name) {
@@ -70,6 +70,7 @@ async function post(req: NextApiRequest, res: NextApiResponse) {
         id_measure,
         id_user: userData.userId,
         id_group: userData.groupId,
+        description,
       })
       .returning(["ingredient_id", "name"]);
 

@@ -48,6 +48,7 @@ export type Ingredients = {
   name: string;
   id_user: string;
   id_group: string | null;
+  description: string | null;
 };
 
 export type Measures = {
