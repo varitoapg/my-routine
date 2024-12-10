@@ -5,6 +5,7 @@ type BaseModalContext = {
   title?: string;
   footer?: React.ReactNode;
   content?: React.ReactNode;
+  contentClassName?: string;
 };
 const BaseModalContext = React.createContext<BaseModalContext | undefined>(
   undefined,

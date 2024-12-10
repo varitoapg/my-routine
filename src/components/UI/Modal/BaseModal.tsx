@@ -8,7 +8,7 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { BaseModalContext, useBaseModalContext } from "./BaseModalContext";
 
 const modalStyles = cva(
-  "fixed inset-0 flex-col flex items-center justify-start z-50 m-auto",
+  "fixed inset-0 flex-col flex z-50 m-auto justify-start",
   {
     variants: {
       size: {
@@ -16,9 +16,14 @@ const modalStyles = cva(
         md: "w-1/2 h-3/4",
         lg: "w-3/4 h-3/4",
       },
+      alignment: {
+        start: "items-start",
+        center: "items-center",
+      },
     },
     defaultVariants: {
       size: "md",
+      alignment: "center",
     },
   },
 );
@@ -32,6 +37,8 @@ interface BaseModalProps extends VariantProps<typeof modalStyles> {
   children: ReactNode;
   isCentered?: boolean;
   closeOnEsc?: boolean;
+  contentClassName?: string;
+  alignment?: "start" | "center";
 }
 
 const BaseModal = ({
@@ -39,9 +46,11 @@ const BaseModal = ({
   isOpen,
   onClose,
   size = "md",
+  alignment = "center",
   closeOnEsc = true,
   content,
   footer,
+  contentClassName,
 }: BaseModalProps) => {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -62,12 +71,14 @@ const BaseModal = ({
   }, [isOpen, onClose, closeOnEsc]);
 
   return (
-    <BaseModalContext.Provider value={{ onClose, title, footer, content }}>
+    <BaseModalContext.Provider
+      value={{ onClose, title, footer, content, contentClassName }}
+    >
       {isOpen && (
-        <div className="patata fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 z-40 bg-black bg-opacity-50">
           <div
             className={clsx(
-              modalStyles({ size }),
+              modalStyles({ size, alignment }),
               "overflow-hidden rounded-lg bg-white shadow-lg",
             )}
           >
@@ -91,15 +102,16 @@ BaseModal.Header = function BaseModalHeader() {
         onClick={onClose}
         className="text-gray-500 hover:text-gray-800"
         icon={faTimesCircle}
+        iconClassName="mr-0"
       />
     </div>
   );
 };
 
 BaseModal.Body = function BaseModalBody() {
-  const { content } = useBaseModalContext();
+  const { content, contentClassName } = useBaseModalContext();
 
-  return <div className="px-6 py-4">{content}</div>;
+  return <div className={clsx("px-6 py-4", contentClassName)}>{content}</div>;
 };
 
 BaseModal.Footer = function BaseModalFooter() {

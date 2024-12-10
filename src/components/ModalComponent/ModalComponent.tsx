@@ -16,6 +16,8 @@ interface ModalComponentProps {
   scrollBehavior?: "inside" | "outside";
   renderButton?: (handleOpenModal: () => void) => React.ReactNode;
   footer?: React.ReactNode;
+  contentClassName?: string;
+  alignment?: "start" | "center";
 }
 
 function ModalComponent({
@@ -23,9 +25,11 @@ function ModalComponent({
   show,
   onHide,
   size = "lg",
+  alignment = "center",
   title = "",
   renderButton,
   footer,
+  contentClassName,
 }: ModalComponentProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -46,6 +50,8 @@ function ModalComponent({
         onClose={onHide || (() => setIsModalOpen(false))}
         content={renderChildren}
         footer={footer}
+        contentClassName={contentClassName}
+        alignment={alignment}
       >
         <BaseModal.Header />
         <BaseModal.Body />
