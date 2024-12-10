@@ -79,7 +79,7 @@ const BaseModal = ({
           <div
             className={clsx(
               modalStyles({ size, alignment }),
-              "overflow-hidden rounded-lg bg-white shadow-lg",
+              "flex flex-col overflow-hidden rounded-lg bg-white shadow-lg",
             )}
           >
             {title && <BaseModal.Header />}
@@ -111,7 +111,13 @@ BaseModal.Header = function BaseModalHeader() {
 BaseModal.Body = function BaseModalBody() {
   const { content, contentClassName } = useBaseModalContext();
 
-  return <div className={clsx("px-6 py-4", contentClassName)}>{content}</div>;
+  return (
+    <div
+      className={clsx("flex-grow overflow-y-auto px-6 py-4", contentClassName)}
+    >
+      {content}
+    </div>
+  );
 };
 
 BaseModal.Footer = function BaseModalFooter() {

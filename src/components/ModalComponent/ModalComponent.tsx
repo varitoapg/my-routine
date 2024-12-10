@@ -53,9 +53,9 @@ function ModalComponent({
         contentClassName={contentClassName}
         alignment={alignment}
       >
-        <BaseModal.Header />
-        <BaseModal.Body />
-        <BaseModal.Footer />
+        {title && <BaseModal.Header />}
+        {renderChildren && <BaseModal.Body />}
+        {footer && <BaseModal.Footer />}
       </BaseModal>
       {renderButton && renderButton(handleOpenModal)}
     </>
