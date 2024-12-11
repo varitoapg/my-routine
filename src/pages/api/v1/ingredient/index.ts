@@ -20,10 +20,37 @@ export default async function handler(
 
     if (method === "POST") {
       await post(req, res);
+    } else if (method === "GET") {
+      await get(req, res);
     } else {
       res.setHeader("Allow", ["POST"]);
       throw new MethodNotAllowed("Method not allowed");
     }
+  } catch (error: unknown) {
+    if (error instanceof AppError) {
+      sendError(res, error);
+      return;
+    }
+    sendError(res, new InternalError());
+  }
+}
+
+async function get(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const userData = await checkAndDecodeToken(req);
+
+    const ingredients: Ingredients[] = await knexPostgresClient("ingredients")
+      .select("ingredient_id", "name", "description", "id_measure")
+      .where(function () {
+        this.where("id_user", userData.userId).orWhere(function () {
+          this.whereNotNull("id_group").andWhere("id_group", userData.groupId);
+        });
+      });
+
+    res.status(201).json({
+      success: true,
+      data: ingredients,
+    });
   } catch (error: unknown) {
     if (error instanceof AppError) {
       sendError(res, error);
