@@ -4,8 +4,9 @@ import TextInput from "@components/Form/TextInput/TextInput";
 import { TFunction } from "i18next";
 import { Ingredients } from "@api/types/typesFromDB";
 import { ingredientValidation } from "./ingredientValidation";
-import { useIngredient } from "@hooks/useIngredient/useIngredient";
 import TextAreaInput from "@components/Form/TextAreaInput/TextAreaInput";
+import { useAddIngredient } from "@hooks/ingredient/useAddIngredient";
+// import { useGetAllMeasures } from "@hooks/measure/useGetAllMeasures";
 
 interface IngredientFormProps {
   ingredient: null | Partial<Ingredients>;
@@ -20,7 +21,9 @@ const IngredientForm = ({
   isEdit = false,
   onClose,
 }: IngredientFormProps) => {
-  const { mutate, isPending } = useIngredient({ onSuccess: onClose });
+  const { mutate, isPending } = useAddIngredient({ onSuccess: onClose });
+
+  // const { data, isError, isLoading } = useGetAllMeasures();
 
   const handleSubmit = async (values: Partial<Ingredients>) => {
     try {
@@ -50,6 +53,7 @@ const IngredientForm = ({
                 required
               />
 
+              {/* TODO: Add select input for measures */}
               <Field
                 name="id_measure"
                 id="id_measure"
