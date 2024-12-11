@@ -31,10 +31,7 @@ const IngredientForm = ({
   };
 
   return (
-    <div className="flex h-full w-full max-w-md flex-col">
-      <h2 className="mb-6 text-3xl font-semibold text-gray-800">
-        {isEdit ? t("editIngredientTitle") : t("newIngredientTitle")}
-      </h2>
+    <>
       <Formik
         initialValues={
           isEdit && ingredient ? ingredient : { name: "", id_measure: "" }
@@ -81,7 +78,7 @@ const IngredientForm = ({
           </Form>
         )}
       </Formik>
-    </div>
+    </>
   );
 };
 

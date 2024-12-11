@@ -12,8 +12,8 @@ const modalStyles = cva(
   {
     variants: {
       size: {
-        sm: "w-1/4 h-1/2",
-        md: "w-1/2 h-3/4",
+        sm: "w-1/2 md:w-1/4 h-1/2",
+        md: "w-1/2 h-2/3",
         lg: "w-3/4 h-3/4",
       },
       alignment: {
