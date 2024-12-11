@@ -1,6 +1,7 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { cva, type VariantProps } from "class-variance-authority";
+import clsx from "clsx";
 import React from "react";
 
 const buttonStyles = cva(
@@ -56,11 +57,17 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button className={buttonStyles({ variant, size, fullWidth })} {...props}>
       {icon && iconPosition === "left" && (
-        <FontAwesomeIcon icon={icon} className={`mr-2 ${iconClassName}`} />
+        <FontAwesomeIcon
+          icon={icon}
+          className={clsx({ "mr-2": !iconClassName }, iconClassName)}
+        />
       )}
       {children}
       {icon && iconPosition === "right" && (
-        <FontAwesomeIcon icon={icon} className={`ml-2 ${iconClassName}`} />
+        <FontAwesomeIcon
+          icon={icon}
+          className={clsx({ "ml-2": !iconClassName }, iconClassName)}
+        />
       )}
     </button>
   );
