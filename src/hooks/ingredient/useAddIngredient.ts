@@ -5,7 +5,7 @@ import { AppError } from "@lib/errors/AppError";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
-export const useIngredient = (
+export const useAddIngredient = (
   options?: UseMutationOptions<Ingredients, unknown, Partial<Ingredients>>,
 ) => {
   const { t } = useTranslation(["ingredient", "error"]);
