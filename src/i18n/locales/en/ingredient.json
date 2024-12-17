@@ -7,5 +7,6 @@
   "measure": "Measurement",
   "description": "Description",
   "measureIngredientRequired": "The ingredient measurement is required",
-  "nameIngredientRequired": "The ingredient name is required"
+  "nameIngredientRequired": "The ingredient name is required",
+  "ingredientModalButton": "Add ingredient"
 }

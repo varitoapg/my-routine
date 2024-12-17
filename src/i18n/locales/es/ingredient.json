@@ -7,5 +7,6 @@
   "measure": "Medida",
   "description": "Descripción",
   "measureIngredientRequired": "La medida del ingrediente es obligatoria",
-  "nameIngredientRequired": "El nombre del ingrediente es obligatorio"
+  "nameIngredientRequired": "El nombre del ingrediente es obligatorio",
+  "ingredientModalButton": "Añadir nuevo ingrediente"
 }
