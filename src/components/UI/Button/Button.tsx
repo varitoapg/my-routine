@@ -44,6 +44,10 @@ const buttonStyles = cva(
   },
 );
 
+export type ButtonVariant = VariantProps<typeof buttonStyles>["variant"];
+export type ButtonSize = VariantProps<typeof buttonStyles>["size"];
+export type ButtonBorder = VariantProps<typeof buttonStyles>["border"];
+
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonStyles> {
