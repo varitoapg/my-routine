@@ -2,17 +2,38 @@
 
 import IngredientForm from "@components/IngredientForm/IngredientForm";
 import ModalComponent from "@components/ModalComponent/ModalComponent";
-import Button from "@components/UI/Button/Button";
+import Button, {
+  ButtonBorder,
+  ButtonSize,
+  ButtonVariant,
+} from "@components/UI/Button/Button";
 import { useTranslation } from "react-i18next";
 
-const AddIngredientModal = () => {
+interface AddIngredientModalProps {
+  openModalButtonProps?: {
+    size?: ButtonSize;
+    variant?: ButtonVariant;
+    border?: ButtonBorder;
+  };
+}
+
+const AddIngredientModal = ({
+  openModalButtonProps,
+}: AddIngredientModalProps) => {
   const { t } = useTranslation("ingredient");
 
   return (
     <ModalComponent
       title={t("newIngredientTitle")}
       renderButton={(handleOpenModal) => (
-        <Button onClick={handleOpenModal}>Add Ingredient</Button>
+        <Button
+          onClick={handleOpenModal}
+          size={openModalButtonProps?.size}
+          variant={openModalButtonProps?.variant}
+          border={openModalButtonProps?.border}
+        >
+          {t("ingredientModalButton")}
+        </Button>
       )}
       size="sm"
       alignment="start"
