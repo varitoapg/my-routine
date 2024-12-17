@@ -54,7 +54,7 @@ export const CustomSelect = ({
     <div>
       <label
         htmlFor={field.name}
-        className="block items-center gap-2 text-sm font-medium text-gray-700"
+        className="mb-2 flex items-center gap-2 text-sm font-medium text-gray-700"
       >
         {`${label} ${required ? "*" : ""}`}
         {refetch && (
@@ -65,6 +65,7 @@ export const CustomSelect = ({
             onClick={refetch}
             iconClassName="pr-0"
             aria-label="Refresh options"
+            border="thin"
           />
         )}
       </label>
