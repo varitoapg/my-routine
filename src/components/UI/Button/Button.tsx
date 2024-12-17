@@ -17,6 +17,8 @@ const buttonStyles = cva(
           "bg-accent-red text-dark-slate hover:bg-accent-red-hover focus:ring-accent-red-hover",
         alert:
           "bg-accent-yellow text-dark-slate hover:bg-accent-yellow-hover focus:ring-accent-yellow-hover",
+        ghost:
+          "bg-transparent text-dark-slate hover:bg-gray-100 focus:ring-gray-200", // Ghost style
       },
       size: {
         sm: "px-3 py-1 text-sm",
