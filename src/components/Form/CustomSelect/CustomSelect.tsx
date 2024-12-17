@@ -59,11 +59,11 @@ export const CustomSelect = ({
         {`${label} ${required ? "*" : ""}`}
         {refetch && (
           <Button
-            variant="secondary"
+            variant="ghost"
             size="sm"
             icon={faSyncAlt}
-            iconPosition="left"
             onClick={refetch}
+            iconClassName="pr-0"
             aria-label="Refresh options"
           />
         )}
