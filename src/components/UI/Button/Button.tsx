@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { cva, type VariantProps } from "class-variance-authority";
 import clsx from "clsx";
 import React from "react";
-
 const buttonStyles = cva(
   "inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 hover:scale-105 ease-in-out duration-300 disabled:cursor-not-allowed disabled:opacity-55",
   {
@@ -18,7 +17,7 @@ const buttonStyles = cva(
         alert:
           "bg-accent-yellow text-dark-slate hover:bg-accent-yellow-hover focus:ring-accent-yellow-hover",
         ghost:
-          "bg-transparent text-dark-slate hover:bg-gray-100 focus:ring-gray-200", // Ghost style
+          "bg-transparent text-dark-slate hover:bg-gray-100 focus:ring-gray-200",
       },
       size: {
         sm: "px-3 py-1 text-sm",
@@ -29,11 +28,18 @@ const buttonStyles = cva(
         true: "w-full",
         false: "",
       },
+      border: {
+        none: "",
+        thin: "border border-gray-300",
+        thick: "border-2 border-gray-500",
+        colored: "border border-primary-green",
+      },
     },
     defaultVariants: {
       variant: "primary",
       size: "md",
       fullWidth: false,
+      border: "none",
     },
   },
 );
@@ -51,13 +57,17 @@ const Button: React.FC<ButtonProps> = ({
   variant,
   size,
   fullWidth,
+  border,
   icon,
   iconPosition = "left",
   iconClassName = "",
   ...props
 }) => {
   return (
-    <button className={buttonStyles({ variant, size, fullWidth })} {...props}>
+    <button
+      className={buttonStyles({ variant, size, fullWidth, border })}
+      {...props}
+    >
       {icon && iconPosition === "left" && (
         <FontAwesomeIcon
           icon={icon}
