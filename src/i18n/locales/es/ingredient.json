@@ -8,5 +8,17 @@
   "description": "Descripción",
   "measureIngredientRequired": "La medida del ingrediente es obligatoria",
   "nameIngredientRequired": "El nombre del ingrediente es obligatorio",
-  "ingredientModalButton": "Añadir nuevo ingrediente"
+  "ingredientModalButton": "Añadir nuevo ingrediente",
+  "measureUnit": {
+    "units": "Unidad/es",
+    "grams": "Gramos",
+    "milliliters": "Mililitros",
+    "tablespoons": "Cucharadas",
+    "teaspoons": "Cucharaditas",
+    "cups": "Tazas",
+    "ounces": "Onzas",
+    "pounds": "Libras",
+    "liters": "Litros",
+    "kilograms": "Kilogramos"
+  }
 }

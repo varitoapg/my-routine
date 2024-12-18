@@ -1,0 +1,20 @@
+{
+  "modal": { "title": "Añadir receta" },
+  "missingIngredient": "En caso de no encontrar el ingrediente deseado:",
+  "form": {
+    "name": "Nombre",
+    "description": "Descripción",
+    "ingredients": "Ingredientes",
+    "type": {
+      "title": "Tipo",
+      "options": {
+        "breakfast": "Desayuno",
+        "morning_snack": "Snack de la mañana",
+        "lunch": "Comida",
+        "afternoon_snack": "Snack de la tarde",
+        "dinner": "Cena"
+      }
+    },
+    "submit": "Añadir receta"
+  }
+}

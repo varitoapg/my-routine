@@ -1,0 +1,20 @@
+{
+  "modal": { "title": "Add Recipe" },
+  "missingIngredient": "If you cannot find the desired ingredient:",
+  "form": {
+    "name": "Name",
+    "description": "Description",
+    "ingredients": "Ingredients",
+    "type": {
+      "title": "Type",
+      "options": {
+        "breakfast": "Breakfast",
+        "morning_snack": "Morning Snack",
+        "lunch": "Lunch",
+        "afternoon_snack": "Afternoon Snack",
+        "dinner": "Dinner"
+      }
+    },
+    "submit": "Add Recipe"
+  }
+}
