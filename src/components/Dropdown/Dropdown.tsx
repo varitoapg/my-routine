@@ -2,7 +2,7 @@
 
 import { cn } from "@lib/utils";
 import React, { useState, createContext, useContext, ReactNode } from "react";
-
+// TODO: Move context to it own file
 interface DropdownContextProps {
   selectedValue: string;
   setSelectedValue: (value: string) => void;
@@ -12,6 +12,7 @@ const DropdownContext = createContext<DropdownContextProps | undefined>(
   undefined,
 );
 
+// TODO: Add a prop to set  for and id
 interface DropdownProps {
   children: ReactNode;
   onSelect: (value: string) => void;

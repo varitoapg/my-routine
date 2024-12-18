@@ -6,7 +6,9 @@ import { Ingredients } from "@api/types/typesFromDB";
 import { ingredientValidation } from "./ingredientValidation";
 import TextAreaInput from "@components/Form/TextAreaInput/TextAreaInput";
 import { useAddIngredient } from "@hooks/ingredient/useAddIngredient";
-// import { useGetAllMeasures } from "@hooks/measure/useGetAllMeasures";
+import { useGetAllMeasures } from "@hooks/measure/useGetAllMeasures";
+import CustomSelect from "@components/Form/CustomSelect/CustomSelect";
+import LoadingSpinner from "@components/UI/LoadingSpinner/LoadingSpinner";
 
 interface IngredientFormProps {
   ingredient: null | Partial<Ingredients>;
@@ -23,7 +25,7 @@ const IngredientForm = ({
 }: IngredientFormProps) => {
   const { mutate, isPending } = useAddIngredient({ onSuccess: onClose });
 
-  // const { data, isError, isLoading } = useGetAllMeasures();
+  const { data: measures, isError, isLoading } = useGetAllMeasures();
 
   const handleSubmit = async (values: Partial<Ingredients>) => {
     try {
@@ -53,14 +55,23 @@ const IngredientForm = ({
                 required
               />
 
-              {/* TODO: Add select input for measures */}
-              <Field
-                name="id_measure"
-                id="id_measure"
-                label={t("measure")}
-                component={TextInput}
-                required
-              />
+              {/* TODO: Wrap it in a better loading manager */}
+              {isLoading || isError ? (
+                <LoadingSpinner />
+              ) : (
+                <Field
+                  name="id_measure"
+                  id="id_measure"
+                  label={t("measure")}
+                  component={CustomSelect}
+                  options={measures?.map((measure) => ({
+                    label: t(`measureUnit.${measure.name}`),
+                    value: measure.measure_id,
+                  }))}
+                  required
+                />
+              )}
+
               <Field
                 name="description"
                 id="description"
