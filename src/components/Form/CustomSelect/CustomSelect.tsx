@@ -66,6 +66,8 @@ export const CustomSelect = ({
             iconClassName="pr-0"
             aria-label="Refresh options"
             border="thin"
+            id={field.name}
+            type="button"
           />
         )}
       </label>
